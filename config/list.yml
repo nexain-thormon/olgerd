@@ -1,0 +1,53 @@
+status_order:
+- ACTIVE
+- READY
+- STANDBY
+- WHITELISTED
+- DISABLED
+
+chains:
+  active:
+  - BTC
+  - ETH
+  - LTC
+  - BCH
+  - DOGE
+  - AVAX
+  - GAIA
+  - BSC
+  disabled:
+  - TERRA
+  - BNB
+
+health:
+  delimiter: '---'
+  placeholder: 'N/A'
+  services: {
+    rpc: { port: 27147, check: '/health?' },
+    bfr: { port: 6040, check: '/p2pid' },
+    p2p: { port: 27146 },
+    b2b: { port: 5040 }
+  }
+
+isps:
+- ALJEEL
+- AMAZON
+- ATT
+- AUSSIE BROADBAND
+- AVANTI
+- COGENT
+- COMCAST
+- DATACAMP
+- DIGITALOCEAN
+- GOOGLE
+- GOOGLEWIFI
+- HETZNER
+- HOSTINGER
+- LEASEWEB
+- MICROSOFT
+- OVH
+- SOLLUTIUM
+- STARLINK
+- TWC
+- VULTR
+- ZENLAYER

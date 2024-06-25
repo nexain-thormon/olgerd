@@ -1,0 +1,50 @@
+rune:
+- changePercent24Hr
+- marketCapUsd
+- priceUsd
+- rank
+- supply
+- volumeUsd24Hr
+
+node:
+- bond_providers
+- current_award
+- forced_to_leave
+- ip_address
+- jail
+- leave_height
+- node_address
+- node_operator_address
+- observe_chains
+- requested_to_leave
+- signer_membership
+- slash_points
+- status
+- status_since
+- total_bond
+- version
+
+mnetwork:
+- blockRewards
+- bondingAPY
+- bondMetrics
+- liquidityAPY
+- nextChurnHeight
+- poolActivationCountdown
+- poolShareFactor
+
+stats:
+- addLiquidityCount
+- addLiquidityVolume
+- runePriceUSD
+- swapCount
+- swapCount24h
+- swapCount30d
+- swapVolume
+- switchedRune
+- synthBurnCount
+- synthMintCount
+- toAssetCount
+- toRuneCount
+- withdrawCount
+- withdrawVolume

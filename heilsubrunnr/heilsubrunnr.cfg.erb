@@ -1,0 +1,46 @@
+global
+  stats timeout 30s
+  daemon
+
+defaults
+  log     global
+  mode    http
+  option  dontlognull
+  timeout connect 5s
+  timeout client  50s
+  timeout server  50s
+  default-server check inter 5s
+
+listen stats
+  bind *:<%= App.heilsubrunnr[:port] %>
+  maxconn 10
+  mode http
+  stats enable
+  stats hide-version
+  stats realm "<%= App.heilsubrunnr[:agent] %>"
+  stats uri /stats
+  stats auth <%= App.heilsubrunnr[:user] %>:<%= App.heilsubrunnr[:pass] %>
+  stats refresh 30s
+  stats show-node
+
+<% networks.each do |net, netval| -%>
+<% netval[:svc].each do |svc, svcval| -%>
+<% unless svcval['check'].nil? -%>
+backend <%= net %>---<%= svc %>
+  option httpchk
+  http-check connect
+  http-check send meth GET uri <%= svcval['check'] %> ver HTTP/1.1 hdr Host <%= App.heilsubrunnr[:host] %> hdr User-Agent "<%= App.heilsubrunnr[:agent] %>"
+  http-check expect status 200
+  default-server port <%= svcval['port'] %> check inter 2s
+<% netval[:servers].each do |server| -%>
+  server <%= server['ip_address'] %> <%= server['ip_address'] %>
+<% end -%>
+<% else -%>
+backend <%= net %>---<%= svc %>
+  default-server port <%= svcval['port'] %> check inter 2s
+<% netval[:servers].each do |server| -%>
+  server <%= server['ip_address'] %> <%= server['ip_address'] %>
+<% end -%>
+<% end -%>
+<% end -%>
+<% end -%>
